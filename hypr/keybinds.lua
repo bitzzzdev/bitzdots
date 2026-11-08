@@ -93,6 +93,7 @@ hl.bind(SA .. " + V", hl.dsp.exec_cmd("cliphist wipe"))
 hl.bind(SC .. " + Q", hl.dsp.exit())
 hl.bind(SC .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(S  .. " + H", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(S  .. " + D", hl.dsp.exec_cmd("quick-shelf --toggle"))
 hl.bind(SS .. " + space", hl.dsp.exec_cmd("wofi --show drun"))
 hl.bind(S  .. " + C",     hl.dsp.exec_cmd("chromium --force-dark-mode"))
 

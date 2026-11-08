@@ -273,6 +273,9 @@ install_scripts() {
     mkdir -p "$HOME/.local/bin"
     ln -sf "$DOTFILES_DIR/scripts/hyprlogout" "$HOME/.local/bin/hyprlogout"
     ln -sf "$DOTFILES_DIR/scripts/font-switch.sh" "$HOME/.local/bin/font-switch.sh"
+    ln -sf "$DOTFILES_DIR/scripts/fetch-quick-shelf.sh" "$HOME/.local/bin/fetch-quick-shelf"
+    mkdir -p "$CONFIG_DIR/quick-shelf"
+    ln -sf "$DOTFILES_DIR/scripts/fetch-quick-shelf.sh" "$CONFIG_DIR/quick-shelf/fetch-binary.sh"
 
     ok "Matugen scripts and templates linked"
 }
@@ -283,7 +286,8 @@ make_executable() {
             chmod +x "$s" 2>/dev/null || true
         done
     done
-    chmod +x "$HOME/.local/bin/hyprlogout" "$HOME/.local/bin/font-switch.sh" 2>/dev/null || true
+    chmod +x "$HOME/.local/bin/hyprlogout" "$HOME/.local/bin/font-switch.sh" "$HOME/.local/bin/fetch-quick-shelf" 2>/dev/null || true
+    chmod +x "$DOTFILES_DIR/scripts/fetch-quick-shelf.sh" "$DOTFILES_DIR/scripts/quick-shelf.py" 2>/dev/null || true
     ok "Scripts made executable"
 }
 
@@ -295,7 +299,7 @@ install_waybar_config() {
     link_config "$DOTFILES_DIR/waybar/scripts/launch.sh" "$CONFIG_DIR/waybar/scripts/launch.sh" "waybar"
     link_config "$DOTFILES_DIR/waybar/scripts/media.sh" "$CONFIG_DIR/waybar/scripts/media.sh" "waybar"
     link_config "$DOTFILES_DIR/waybar/scripts/weather.sh" "$CONFIG_DIR/waybar/scripts/weather.sh" "waybar"
-    for s in brightness.sh brightness-adjust.sh notification.sh power-profile.sh power-profile-switch.sh system-power.sh workspaces.sh workspace-click.sh workspace-next.sh workspace-prev.sh tui-wifi.sh tui-bluetooth.sh tui-audio.sh tui-cpu.sh; do
+    for s in brightness.sh brightness-adjust.sh notification.sh power-profile.sh power-profile-switch.sh system-power.sh workspaces.sh workspace-click.sh workspace-next.sh workspace-prev.sh tui-wifi.sh tui-bluetooth.sh tui-audio.sh tui-cpu.sh shelf-status.sh; do
         link_config "$DOTFILES_DIR/waybar/scripts/$s" "$CONFIG_DIR/waybar/scripts/$s" "waybar"
     done
     for s in "$DOTFILES_DIR/scripts"/record*.sh; do

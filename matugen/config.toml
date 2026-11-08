@@ -109,3 +109,7 @@ output_path = "~/.local/share/color-schemes/bitzdots.colors"
 [templates.qt6ct]
 input_path = "~/.config/matugen/templates/qt6ct.conf"
 output_path = "~/.config/qt6ct/qt6ct.conf"
+
+[templates.quick_shelf]
+input_path = "~/.config/matugen/templates/quick-shelf.css"
+output_path = "~/.config/quick-shelf/style.css"
