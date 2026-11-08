@@ -43,24 +43,24 @@
 > [!WARNING]
 > **Repository Renaming Notice**: This repository will be renamed to **DEVdots** soon!
 
-bitzdots is a **lean, automated theming system** for Hyprland on Wayland. Change your wallpaper, and every component — status bar, terminal, launcher, notifications, logout screen, audio visualizer, even Qt/KDE apps — instantly adapts to match.
+bitzdots is a **lean, automated theming system** for Hyprland on Wayland. Change your wallpaper, and every component (status bar, terminal, launcher, notifications, logout screen, audio visualizer, even Qt/KDE apps) instantly adapts to match.
 
 Built for **low-end hardware** without sacrificing usability. The full stack (Hyprland + waybar + swaync) idles under **300MB RAM**, with aggressive CPU optimizations to keep fans quiet on older machines.
 
 ## Features
 
-- **🎨 Full-stack auto-theming** — One wallpaper change propagates to 20+ components via matugen M3 color extraction (waybar, kitty, rofi, swaync, wlogout, cava, Hyprland borders, Qt/KDE, GTK, even browser CSS)
-- **⚡ Event-driven cache daemon** — inotify-based background pre-generation means wallpaper switching is instant, not sluggish
-- **🖼 Live wallpaper support** — Static images with animated transitions (`awww`) and video wallpapers (`mpvpaper`) with automatic palette extraction
-- **🧩 26 templates** — Every themed component (including launcher, power, wallpaper-grid themes and 8 SVG icons) uses a template. Colors are consistent everywhere
-- **🔧 Rofi-powered everything** — App launcher, clipboard manager (cliphist), power menu, wallpaper picker (grid with thumbnails), WiFi, Bluetooth, audio, system monitor — all keyboard-navigable
-- **🖥 Waybar with 15 modules** — Workspace batch display, runcat CPU animation, live media, recording indicator, brightness, power profiles, notification center toggle, system TUIs
-- **🔒 Full-screen + region recording** — wf-recorder with audio, start/stop toggle keybinds, saves to organized directories
-- **📸 Screenshots with clipboard** — Fullscreen (Print) and selection (SUPER+SHIFT+S) both save AND copy to clipboard
-- **🐟 Fish shell + fastfetch** — Minimal greeting-less shell, custom BITZ ASCII logo on startup
-- **🔄 Safe theme switching** — Backup/restore on every matugen run; if generation fails, previous theme is restored
-- **🏞 Wallpaper cache daemon** — Monitors wallpaper directories with inotify, pre-generates palettes so switching is instant
-- **📦 Multi-distro installer** — Automated setup for Arch, Fedora, Debian/Ubuntu, and NixOS with `--with-deps` flag
+- **Full-stack auto-theming**: One wallpaper change propagates to 20+ components via matugen M3 color extraction (waybar, kitty, rofi, swaync, wlogout, cava, Hyprland borders, Qt/KDE, GTK, even browser CSS).
+- **Event-driven cache daemon**: inotify-based background pre-generation means wallpaper switching is instant, not sluggish.
+- **Live wallpaper support**: Static images with animated transitions (`awww`) and video wallpapers (`mpvpaper`) with automatic palette extraction.
+- **26 templates**: Every themed component (including launcher, power, wallpaper-grid themes and 8 SVG icons) uses a template. Colors are consistent everywhere.
+- **Rofi-powered menus**: App launcher, clipboard manager (cliphist), power menu, wallpaper picker (grid with thumbnails), WiFi, Bluetooth, audio, system monitor, all keyboard-navigable.
+- **Waybar with 16 modules**: Workspace batch display, runcat CPU animation, live media, quick-shelf popover, recording indicator, brightness, power profiles, notification center toggle, system TUIs.
+- **Full-screen and region recording**: wf-recorder with audio, start/stop toggle keybinds, saves to organized directories.
+- **Screenshots with clipboard**: Fullscreen (Print) and selection (SUPER+SHIFT+S) both save and copy to clipboard.
+- **Fish shell and fastfetch**: Minimal greeting-less shell, custom BITZ ASCII logo on startup.
+- **Safe theme switching**: Backup/restore on every matugen run; if generation fails, previous theme is restored.
+- **Wallpaper cache daemon**: Monitors wallpaper directories with inotify, pre-generates palettes so switching is instant.
+- **Multi-distro installer**: Automated setup for Arch, Fedora, Debian/Ubuntu, and NixOS with `--with-deps` flag.
 
 ## Quick Start
 
@@ -170,14 +170,38 @@ Config files for every component (20+ files)
 All apps pick up new colors instantly
 ```
 
+## Quick Shelf Widget
+
+bitzdots integrates **Quick Shelf**, a lightweight desktop shelf and Waybar popover:
+- **App Shortcuts**: Quick-launch pinned apps or search and add installed desktop applications.
+- **Image Shelf**: Drag and drop images from file managers or web browsers into the shelf for instant preview.
+- **Two-way Drag and Drop**: Drag thumbnails directly out of the shelf into external apps (Discord, web browsers, GIMP, Nautilus).
+- **Homescreen Widget**: Runs on the desktop background layer (`quick-shelf --homescreen`).
+- **Waybar Module**: Displays item counts with click-to-toggle popover on the bar (`SUPER + D`).
+
+To fetch the precompiled release binary without on-device compilation:
+```bash
+dev shelf fetch
+```
+Or update:
+```bash
+dev shelf update
+```
+
 ## Requirements
 
 - **Hyprland** (Wayland compositor)
-- **matugen** — Material 3 color palette generator
-- **inotify-tools** — for cache daemon
-- **Nerd Font** — icons (JetBrainsMono recommended)
-- **inotify-tools** — for cache daemon
-- **Nerd Font** — icons (JetBrainsMono recommended)
+- **matugen**: Material 3 color palette generator
+- **inotify-tools**: for cache daemon
+- **Nerd Font**: icons (JetBrainsMono recommended)
+- **GTK 3** and **gtk-layer-shell**: for Wayland layer widgets
+
+## Environment Variables
+
+- `XDG_CONFIG_HOME`: user configuration directory (defaults to `~/.config`)
+- `XDG_DATA_HOME`: user data directory (defaults to `~/.local/share`)
+- `XDG_RUNTIME_DIR`: runtime socket directory (defaults to `/run/user/<UID>` or `/tmp`)
+- `WALLPAPER_DIR`: directory containing wallpaper images (defaults to `~/Pictures/Wallpapers`)
 
 ## Supported Distros
 
@@ -185,11 +209,11 @@ Arch Linux (including Arch-based), Fedora, Debian/Ubuntu, NixOS.
 
 ## Philosophy
 
-1. **Low-end first** — Every watt and megabyte matters. Scripts are optimized for minimal CPU/RAM, not convenience
-2. **Theme automatically** — One wallpaper change, everything updates. No manual color picking
-3. **Safe by default** — Backup/restore on every theme generation. Failure never leaves you with broken configs
-4. **Keyboard-driven** — Everything in reach of the home row. Mouse optional
-5. **No bloat** — Every component earns its place. No unused default configs or unnecessary dependencies
+1. **Low-end first**: Every watt and megabyte matters. Scripts are optimized for minimal CPU/RAM, not convenience
+2. **Theme automatically**: One wallpaper change, everything updates. No manual color picking
+3. **Safe by default**: Backup/restore on every theme generation. Failure never leaves you with broken configs
+4. **Keyboard-driven**: Everything in reach of the home row. Mouse optional
+5. **No bloat**: Every component earns its place. No unused default configs or unnecessary dependencies
 
 ## License
 
