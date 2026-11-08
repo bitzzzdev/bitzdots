@@ -7,7 +7,7 @@ set -euo pipefail
 BIN_DIR="${XDG_BIN_HOME:-$HOME/.local/bin}"
 CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/quick-shelf"
 DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/quick-shelf"
-REPO="bitzzdev/quick-shelf"
+REPO="bitzzdev/quickShelf"
 RELEASE_TAG="quick-shelf-latest"
 TARGET_NAME="quick-shelf-x86_64"
 DEST_BIN="$BIN_DIR/quick-shelf"
