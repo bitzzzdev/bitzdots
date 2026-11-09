@@ -103,6 +103,7 @@ hl.window_rule({
     name  = "float-quick-shelf",
     match = { class = "^quick-shelf$" },
     float = true,
+    center = true,
 })
 
 hl.window_rule({

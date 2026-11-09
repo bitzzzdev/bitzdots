@@ -69,8 +69,8 @@ if test -f /etc/arch-release
                 set -l subcmd $argv[2]
                 switch "$subcmd"
                     case fetch update
-                        if test -f "$HOME/.config/quick-shelf/fetch-binary.sh"
-                            "$HOME/.config/quick-shelf/fetch-binary.sh"
+                        if test -f "$HOME/.config/qshelf/fetch-binary.sh"
+                            "$HOME/.config/qshelf/fetch-binary.sh"
                         else if test -f "$HOME/.local/bin/fetch-quick-shelf"
                             "$HOME/.local/bin/fetch-quick-shelf"
                         else

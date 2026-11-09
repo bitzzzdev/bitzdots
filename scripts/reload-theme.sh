@@ -22,12 +22,6 @@ if pgrep -x swaync > /dev/null; then
     echo "   SwayNC CSS reloaded"
 fi
 
-# --- Quick Shelf: reload the generated GTK palette ---
-if pgrep -x quick-shelf > /dev/null && command -v quick-shelf &>/dev/null; then
-    quick-shelf --reload-style >/dev/null 2>&1 || true
-    echo "   Quick Shelf CSS reloaded"
-fi
-
 # --- Hyprland border colors: update via keyword (compatible across all versions) ---
 if command -v hyprctl &>/dev/null && [ -f "$CONFIG_DIR/hypr/colors.lua" ]; then
     c1=$(grep "color1" "$CONFIG_DIR/hypr/colors.lua" | head -1 | sed "s/.*= \"\(.*\)\",/\1/" || true)
@@ -81,13 +75,15 @@ if [ -n "$chromium_theme" ]; then
     done
 fi
 
-# --- Quick Shelf : reload CSS ---
-if command -v quick-shelf &>/dev/null; then
-    quick-shelf --reload-style 2>/dev/null || true
-    echo "   Quick Shelf style reloaded"
-elif [ -x "$HOME/.local/bin/quick-shelf" ]; then
-    "$HOME/.local/bin/quick-shelf" --reload-style 2>/dev/null || true
-    echo "   Quick Shelf style reloaded"
+# --- Quick Shelf: reload the generated GTK palette ---
+if pgrep -x quick-shelf > /dev/null; then
+    if command -v quick-shelf &>/dev/null; then
+        quick-shelf --reload-style >/dev/null 2>&1 || true
+        echo "   Quick Shelf CSS reloaded"
+    elif [ -x "$HOME/.local/bin/quick-shelf" ]; then
+        "$HOME/.local/bin/quick-shelf" --reload-style >/dev/null 2>&1 || true
+        echo "   Quick Shelf CSS reloaded"
+    fi
 fi
 
 echo ":: Theme reload complete!"

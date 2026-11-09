@@ -4,7 +4,7 @@
 
 ### Added
 - Added a Matugen template that generates the Quick Shelf palette at
-  `~/.config/quick-shelf/colors.css`.
+  `~/.config/qshelf/colors.css`.
 - Added Quick Shelf to the theme reload sequence when it is running.
 - Quick Shelf widget integration: App shortcut storage and image drop shelf
   with instant thumbnail preview and two-way drag-and-drop.
@@ -22,3 +22,9 @@
 - Standardized documentation and documented XDG and wallpaper environment
   variables.
 - Updated `install.sh` with Quick Shelf script links and executable permissions.
+- Moved Quick Shelf configuration and generated theme files to
+  `~/.config/qshelf/`.
+- Made the popup a normal floating window so Hyprland rules and SUPER plus
+  mouse movement apply.
+- Updated the fallback runner to load generated Quick Shelf palette colors
+  before local style overrides.

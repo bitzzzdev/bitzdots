@@ -14,102 +14,116 @@ import time
 from pathlib import Path
 
 # Paths
-CONFIG_DIR = Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config")) / "quick-shelf"
+CONFIG_DIR = Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config")) / "qshelf"
 DATA_DIR = Path(os.environ.get("XDG_DATA_HOME", Path.home() / ".local/share")) / "quick-shelf"
 IMAGES_DIR = DATA_DIR / "images"
 SHORTCUTS_FILE = DATA_DIR / "shortcuts.json"
 IMAGES_FILE = DATA_DIR / "images.json"
 STYLE_FILE = CONFIG_DIR / "style.css"
+COLORS_FILE = CONFIG_DIR / "colors.css"
 SOCKET_FILE = Path(os.environ.get("XDG_RUNTIME_DIR", "/tmp")) / f"quick-shelf-{os.getuid()}.sock"
 
 CONFIG_DIR.mkdir(parents=True, exist_ok=True)
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 
 DEFAULT_CSS = b"""
+@define-color bg rgba(22, 13, 17, 0.94);
+@define-color bg-alt rgba(38, 20, 32, 0.6);
+@define-color fg #f8e4df;
+@define-color fg-muted #d4a8a2;
+@define-color selected #d46478;
+@define-color active rgba(53, 24, 44, 0.5);
+@define-color border-color rgba(110, 68, 80, 0.45);
+@define-color card-bg rgba(38, 20, 32, 0.6);
+@define-color card-hover rgba(53, 24, 44, 0.85);
+
 .quick-shelf-window {
-    background-color: rgba(22, 13, 17, 0.94);
-    border: 1px solid rgba(110, 68, 80, 0.45);
-    border-radius: 18px;
-    padding: 14px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    background-color: @bg;
+    border: 2px solid @selected;
+    border-radius: 0;
+    padding: 0;
 }
 .qs-header {
-    margin-bottom: 10px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: @bg-alt;
+    margin-bottom: 12px;
+    padding: 12px 16px;
+    border-bottom: 2px solid @border-color;
+}
+.qs-mainbox {
+    padding: 8px 12px 12px;
 }
 .qs-title {
     font-size: 14px;
     font-weight: bold;
-    color: #f8e4df;
+    color: @fg;
 }
 .qs-badge {
-    background: #35182c;
-    color: #d46478;
-    border-radius: 10px;
+    background: @selected;
+    color: @bg;
+    border-radius: 0;
     padding: 2px 8px;
     font-size: 11px;
     font-weight: 600;
 }
 .qs-btn {
-    background: rgba(53, 24, 44, 0.5);
-    color: #f8e4df;
-    border: 1px solid rgba(110, 68, 80, 0.3);
-    border-radius: 8px;
-    padding: 4px 8px;
+    background: @bg-alt;
+    color: @fg;
+    border: 1px solid @border-color;
+    border-radius: 0;
+    padding: 6px 10px;
 }
 .qs-btn:hover {
-    background: #d46478;
-    color: #160d11;
+    background: @selected;
+    color: @bg;
 }
 .qs-section-title {
     font-size: 12px;
     font-weight: bold;
-    color: #d4a8a2;
+    color: @fg-muted;
     margin-top: 6px;
     margin-bottom: 6px;
 }
 .qs-app-card {
-    background: rgba(38, 20, 32, 0.6);
-    border: 1px solid rgba(110, 68, 80, 0.25);
-    border-radius: 12px;
+    background: @card-bg;
+    border: 1px solid @border-color;
+    border-radius: 0;
     padding: 8px 6px;
     min-width: 68px;
     min-height: 68px;
 }
 .qs-app-card:hover {
-    background: rgba(53, 24, 44, 0.85);
-    border-color: #d46478;
+    background: @card-hover;
+    border-color: @selected;
 }
 .qs-app-label {
     font-size: 11px;
-    color: #f8e4df;
+    color: @fg;
     margin-top: 4px;
 }
 .qs-image-card {
-    background: rgba(38, 20, 32, 0.6);
-    border: 1px solid rgba(110, 68, 80, 0.3);
-    border-radius: 10px;
+    background: @card-bg;
+    border: 1px solid @border-color;
+    border-radius: 0;
     padding: 4px;
 }
 .qs-image-card:hover {
-    border-color: #d46478;
+    border-color: @selected;
 }
 .qs-dropzone {
-    border: 2px dashed rgba(110, 68, 80, 0.5);
-    border-radius: 12px;
+    border: 2px dashed @border-color;
+    border-radius: 0;
     padding: 18px 12px;
-    background: rgba(22, 13, 17, 0.4);
+    background: @card-bg;
 }
 .qs-preview-overlay {
-    background: rgba(22, 13, 17, 0.96);
-    border-radius: 16px;
-    padding: 12px;
-    border: 1px solid rgba(212, 100, 120, 0.3);
+    background: @bg;
+    border-radius: 0;
+    padding: 16px;
+    border: 1px solid @border-color;
 }
 .qs-tab-active {
-    background: #d46478;
-    color: #160d11;
+    background: @selected;
+    color: @bg;
     font-weight: bold;
 }
 """
@@ -210,9 +224,10 @@ def launch_gui(is_homescreen=False):
     win.set_title("Quick Shelf")
     win.set_wmclass("quick-shelf", "quick-shelf")
     win.set_default_size(380, -1)
-    win.set_resizable(False)
+    win.set_resizable(not is_homescreen)
+    win.set_decorated(False)
 
-    if layer_shell_available:
+    if layer_shell_available and is_homescreen:
         GtkLayerShell.init_for_window(win)
         layer = GtkLayerShell.Layer.BOTTOM if is_homescreen else GtkLayerShell.Layer.TOP
         GtkLayerShell.set_layer(win, layer)
@@ -232,10 +247,13 @@ def launch_gui(is_homescreen=False):
 
     # CSS
     css_provider = Gtk.CssProvider()
+    css_parts = []
+    if COLORS_FILE.exists():
+        css_parts.append(COLORS_FILE.read_bytes())
+    css_parts.append(DEFAULT_CSS)
     if STYLE_FILE.exists():
-        css_provider.load_from_path(str(STYLE_FILE))
-    else:
-        css_provider.load_from_data(DEFAULT_CSS)
+        css_parts.append(STYLE_FILE.read_bytes())
+    css_provider.load_from_data(b"\n".join(css_parts))
 
     screen = Gdk.Screen.get_default()
     if screen:
@@ -251,6 +269,7 @@ def launch_gui(is_homescreen=False):
     stack.set_transition_duration(150)
 
     content_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+    content_box.get_style_context().add_class("qs-mainbox")
     preview_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
     preview_box.get_style_context().add_class("qs-preview-overlay")
 

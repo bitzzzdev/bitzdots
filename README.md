@@ -139,7 +139,7 @@ Full reference: **[docs/keybindings.md](docs/keybindings.md)**
 ├── kitty/             # Terminal (themed)
 ├── cava/              # Audio visualizer (themed)
 ├── matugen/           # Theming engine (26 templates)
-├── quick-shelf/       # Generated Quick Shelf palette lives in ~/.config/quick-shelf
+├── qshelf/             # Generated Quick Shelf palette lives in ~/.config/qshelf
 ├── fish/              # Fish shell config
 ├── fastfetch/         # System fetch (custom logo)
 └── scripts/           # 10 utility scripts
