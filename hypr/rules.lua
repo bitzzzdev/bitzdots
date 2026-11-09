@@ -100,6 +100,12 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name  = "float-quick-shelf",
+    match = { class = "^quick-shelf$" },
+    float = true,
+})
+
+hl.window_rule({
     name           = "suppress-maximize",
     match          = { class = ".*" },
     suppress_event = "maximize",

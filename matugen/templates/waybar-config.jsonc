@@ -12,7 +12,7 @@
 
   "modules-left": ["custom/workspaces", "custom/runcat", "custom/media"],
   "modules-center": ["clock"],
-  "modules-right": ["tray", "custom/recording", "custom/brightness", "pulseaudio", "cpu", "memory", "custom/power-profiles", "custom/notification", "network", "bluetooth", "custom/power"],
+  "modules-right": ["tray", "custom/shelf", "custom/recording", "custom/brightness", "pulseaudio", "cpu", "memory", "custom/power-profiles", "custom/notification", "network", "bluetooth", "custom/power"],
 
   "tray": {
     "spacing": 8
@@ -52,6 +52,15 @@
     "return-type": "json",
     "interval": 10,
     "tooltip": false
+  },
+
+  "custom/shelf": {
+    "exec": "~/.config/waybar/scripts/shelf-status.sh",
+    "return-type": "json",
+    "interval": 2,
+    "tooltip": true,
+    "on-click": "~/.local/bin/quick-shelf --toggle",
+    "on-click-right": "~/.local/bin/quick-shelf --popup"
   },
 
   "clock": {

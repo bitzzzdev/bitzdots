@@ -76,6 +76,7 @@
 #bluetooth,
 #custom-power,
 #custom-power-profiles,
+#custom-shelf,
 #custom-recording,
 #custom-notification {
     font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
@@ -274,6 +275,21 @@ tooltip label {
 
 #custom-recording.idle {
     color: transparent;
+}
+
+#custom-shelf {
+    padding: 0 10px;
+    margin: 0 3px;
+    color: @on_surface_variant;
+}
+
+#custom-shelf:hover {
+    background: alpha(@primary_container, 0.4);
+    color: @primary;
+}
+
+#custom-shelf.has-items {
+    color: @primary;
 }
 
 #custom-brightness {

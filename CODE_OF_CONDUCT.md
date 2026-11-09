@@ -1,15 +1,32 @@
 # Code of Conduct
 
-## Expected behavior
+## Our Pledge
 
-Contributors are expected to be respectful, direct, and constructive. Keep
-discussions focused on the project and assume good intent while resolving
-disagreements.
+We as members, contributors, and leaders pledge to make participation in our
+community a harassment-free experience for everyone, regardless of age, body
+size, visible or invisible disability, ethnicity, sex characteristics, gender
+identity and expression, level of experience, education, socio-economic status,
+nationality, personal appearance, race, caste, color, religion, or sexual
+identity and orientation.
 
-## Unacceptable behavior
+## Standards
 
-Harassment, discrimination, personal attacks, deliberate disruption, and
-publication of private information are not acceptable.
+Examples of behavior that contributes to a positive environment:
+- Demonstrating empathy and kindness toward other people
+- Being respectful of differing opinions and viewpoints
+- Giving and gracefully accepting constructive feedback
+- Accepting responsibility and apologizing to those affected by our mistakes
+
+Examples of unacceptable behavior:
+- Trolling, insulting or derogatory comments, and personal or political attacks
+- Public or private harassment
+- Publishing others' private information without explicit permission
+
+## Enforcement
+
+Project maintainers are responsible for clarifying and enforcing standards of
+acceptable behavior and will take appropriate action in response to any behavior
+that they deem inappropriate, threatening, or offensive.
 
 ## Reporting
 

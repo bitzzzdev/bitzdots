@@ -13,10 +13,10 @@ Thanks for wanting to contribute to bitzdots!
 
 ## Guidelines
 
-- Keep the **low-end focus** — every addition should be optional or lightweight
-- **Document your changes** — update relevant docs if adding features
-- **Follow the style** — match existing code patterns and conventions
-- **No bloat** — if a feature adds significant overhead, make it opt-in
+- Keep the **low-end focus**: every addition should be optional or lightweight
+- **Document your changes**: update relevant docs if adding features
+- **Follow the style**: match existing code patterns and conventions
+- **No bloat**: if a feature adds significant overhead, make it opt-in
 
 ## Reporting Issues
 
@@ -28,4 +28,4 @@ Open an issue with the feature request template. Explain the use case and why it
 
 ## Code of Conduct
 
-Be respectful. This is a hobby project — keep it fun.
+Be respectful. This is a hobby project; keep it fun.

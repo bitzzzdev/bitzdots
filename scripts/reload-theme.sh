@@ -81,4 +81,13 @@ if [ -n "$chromium_theme" ]; then
     done
 fi
 
+# --- Quick Shelf : reload CSS ---
+if command -v quick-shelf &>/dev/null; then
+    quick-shelf --reload-style 2>/dev/null || true
+    echo "   Quick Shelf style reloaded"
+elif [ -x "$HOME/.local/bin/quick-shelf" ]; then
+    "$HOME/.local/bin/quick-shelf" --reload-style 2>/dev/null || true
+    echo "   Quick Shelf style reloaded"
+fi
+
 echo ":: Theme reload complete!"

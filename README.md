@@ -54,7 +54,7 @@ Built for **low-end hardware** without sacrificing usability. The full stack (Hy
 - **Live wallpaper support:** Static images with animated transitions (`awww`) and video wallpapers (`mpvpaper`) use automatic palette extraction.
 - **26 templates:** Every themed component, including launcher, power, wallpaper-grid themes, and eight SVG icons, uses a template.
 - **Rofi-powered menus:** The app launcher, clipboard manager (cliphist), power menu, wallpaper picker, WiFi, Bluetooth, audio, system monitor, and Quick Shelf styling are keyboard-navigable.
-- **Waybar with 15 modules:** Workspace display, CPU animation, media, recording indicator, brightness, power profiles, notifications, and system TUIs.
+- **Waybar with 16 modules:** Workspace display, CPU animation, media, Quick Shelf, recording indicator, brightness, power profiles, notifications, and system TUIs.
 - **Screen recording:** wf-recorder supports full-screen and region recording with audio and organized output directories.
 - **Screenshots with clipboard:** Fullscreen and selection screenshots both save and copy to the clipboard.
 - **Fish shell and fastfetch:** The shell stays quiet and fastfetch shows the custom BITZ logo on startup.
@@ -171,12 +171,38 @@ Config files for every component (20+ files)
 All apps pick up new colors instantly
 ```
 
+## Quick Shelf Widget
+
+bitzdots integrates **Quick Shelf**, a lightweight desktop shelf and Waybar popover:
+- **App Shortcuts**: Quick-launch pinned apps or search and add installed desktop applications.
+- **Image Shelf**: Drag and drop images from file managers or web browsers into the shelf for instant preview.
+- **Two-way Drag and Drop**: Drag thumbnails directly out of the shelf into external apps (Discord, web browsers, GIMP, Nautilus).
+- **Homescreen Widget**: Runs on the desktop background layer (`quick-shelf --homescreen`).
+- **Waybar Module**: Displays item counts with click-to-toggle popover on the bar (`SUPER + D`).
+
+To fetch the precompiled release binary without on-device compilation:
+```bash
+dev shelf fetch
+```
+Or update:
+```bash
+dev shelf update
+```
+
 ## Requirements
 
 - **Hyprland** (Wayland compositor)
 - **matugen:** Material 3 color palette generator
 - **inotify-tools:** Required by the cache daemon
 - **Nerd Font:** Provides icons, JetBrainsMono is recommended
+- **GTK 3** and **gtk-layer-shell**: for Wayland layer widgets
+
+## Environment Variables
+
+- `XDG_CONFIG_HOME`: user configuration directory (defaults to `~/.config`)
+- `XDG_DATA_HOME`: user data directory (defaults to `~/.local/share`)
+- `XDG_RUNTIME_DIR`: runtime socket directory (defaults to `/run/user/<UID>` or `/tmp`)
+- `WALLPAPER_DIR`: directory containing wallpaper images (defaults to `~/Pictures/Wallpapers`)
 
 ## Supported Distros
 

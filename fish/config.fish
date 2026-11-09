@@ -51,6 +51,13 @@ if test -f /etc/arch-release
             echo "Font & UI Management:"
             echo "  font switch      Switch font (dev font switch [paper|jetbrains])"
             echo "  font toggle      Toggle between Paper Mono and JetBrainsMono"
+            echo ""
+            echo "Quick Shelf Widget:"
+            echo "  shelf fetch      Fetch precompiled quick-shelf binary from GitHub"
+            echo "  shelf update     Update quick-shelf binary to latest release"
+            echo "  shelf status     Check quick-shelf status"
+            echo "  shelf toggle     Toggle quick-shelf popover"
+            echo "  shelf homescreen Launch quick-shelf as desktop widget"
             return 0
         end
 
@@ -58,6 +65,49 @@ if test -f /etc/arch-release
         set -l args $argv[2..-1]
 
         switch $cmd
+            case shelf
+                set -l subcmd $argv[2]
+                switch "$subcmd"
+                    case fetch update
+                        if test -f "$HOME/.config/quick-shelf/fetch-binary.sh"
+                            "$HOME/.config/quick-shelf/fetch-binary.sh"
+                        else if test -f "$HOME/.local/bin/fetch-quick-shelf"
+                            "$HOME/.local/bin/fetch-quick-shelf"
+                        else
+                            set -l git_script (git rev-parse --show-toplevel 2>/dev/null)/scripts/fetch-quick-shelf.sh
+                            if test -f "$git_script"
+                                "$git_script"
+                            else
+                                echo "fetch-quick-shelf.sh not found."
+                            end
+                        end
+                    case status
+                        if type -q quick-shelf
+                            quick-shelf --status
+                        else if test -x "$HOME/.local/bin/quick-shelf"
+                            "$HOME/.local/bin/quick-shelf" --status
+                        else
+                            echo "quick-shelf is not installed. Run 'dev shelf fetch'."
+                        end
+                    case toggle ''
+                        if type -q quick-shelf
+                            quick-shelf --toggle
+                        else if test -x "$HOME/.local/bin/quick-shelf"
+                            "$HOME/.local/bin/quick-shelf" --toggle
+                        else
+                            echo "quick-shelf is not installed. Run 'dev shelf fetch'."
+                        end
+                    case homescreen desktop
+                        if type -q quick-shelf
+                            quick-shelf --homescreen &
+                        else if test -x "$HOME/.local/bin/quick-shelf"
+                            "$HOME/.local/bin/quick-shelf" --homescreen &
+                        else
+                            echo "quick-shelf is not installed. Run 'dev shelf fetch'."
+                        end
+                    case '*'
+                        echo "Usage: dev shelf [fetch | update | status | toggle | homescreen]"
+                end
             case font
                 set -l subcmd $argv[2]
                 switch "$subcmd"
@@ -219,5 +269,10 @@ if test -f /etc/arch-release
     alias dev-services='dev services'
     alias dev-font='dev font'
     alias dev-font-toggle='dev font toggle'
+    alias dev-shelf='dev shelf'
+    alias dev-shelf-fetch='dev shelf fetch'
+    alias dev-shelf-update='dev shelf update'
+    alias dev-shelf-status='dev shelf status'
+    alias dev-shelf-toggle='dev shelf toggle'
 end
 
