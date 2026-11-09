@@ -22,6 +22,12 @@ if pgrep -x swaync > /dev/null; then
     echo "   SwayNC CSS reloaded"
 fi
 
+# --- Quick Shelf: reload the generated GTK palette ---
+if pgrep -x quick-shelf > /dev/null && command -v quick-shelf &>/dev/null; then
+    quick-shelf --reload-style >/dev/null 2>&1 || true
+    echo "   Quick Shelf CSS reloaded"
+fi
+
 # --- Hyprland border colors: update via keyword (compatible across all versions) ---
 if command -v hyprctl &>/dev/null && [ -f "$CONFIG_DIR/hypr/colors.lua" ]; then
     c1=$(grep "color1" "$CONFIG_DIR/hypr/colors.lua" | head -1 | sed "s/.*= \"\(.*\)\",/\1/" || true)

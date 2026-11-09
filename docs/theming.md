@@ -18,7 +18,7 @@ All running apps pick up new colors
 
 ### 1. Color Extraction
 
-**matugen** analyzes your wallpaper image using the `fastresize` backend and `salience` colorspace to extract a `saliencedark16` palette — extracting from highest available salient/contrasting color to lowest:
+**matugen** analyzes your wallpaper image using the `fastresize` backend and `salience` colorspace to extract a `saliencedark16` palette. It starts with the most salient and contrasting color:
 
 | Index | Usage |
 |-------|-------|
@@ -27,11 +27,11 @@ All running apps pick up new colors
 | `color1`-`color9` | Accent colors (active borders, highlights) |
 | `color8`-`color15` | Terminal ANSI colors |
 
-Contrast checking is enabled — matugen ensures text remains readable.
+Contrast checking is enabled. matugen ensures text remains readable.
 
 ### 2. Template Rendering
 
-25 Jinja2 templates in `matugen/templates/` use matugen color variables:
+26 Jinja2 templates in `matugen/templates/` use matugen color variables:
 
 ```jinja2
 {{background}}       → #1a1218
@@ -64,7 +64,7 @@ The `matugen-cache-daemon.service` runs at low priority (Nice=19) and:
 4. **Skips** problematic images with a 24-hour cooldown to avoid repeating failures
 5. **Uses file locking** to prevent concurrent runs
 
-This means when you select a wallpaper from the picker, the theme applies instantly — no waiting for matugen to run.
+When you select a wallpaper from the picker, the theme applies without waiting for matugen to run.
 
 ### 4. Theme Reload
 
@@ -72,8 +72,9 @@ When a wallpaper is changed, `reload-theme.sh`:
 
 1. Runs matugen to generate new configs from templates
 2. Reloads swaync CSS (notifies swaync to re-read style.css)
-3. Updates Hyprland border colors from `colors.lua`
-4. Restarts waybar so all module colors refresh
+3. Reloads Quick Shelf if it is running
+4. Updates Hyprland border colors from `colors.lua`
+5. Restarts waybar so all module colors refresh
 
 ## Backup/Restore Safety
 
@@ -88,7 +89,7 @@ This means a bad wallpaper or failed matugen image never --config ~/.config/matu
 
 ## Template Reference
 
-All 25 templates in `matugen/templates/`:
+All 26 templates in `matugen/templates/`:
 
 | Template | Target | Purpose |
 |---|---|---|
@@ -100,6 +101,7 @@ All 25 templates in `matugen/templates/`:
 | `kitty-colors.conf.j2` | `kitty/colors.conf` | Terminal colors |
 | `cava-colors.j2` | `cava/themes/generated` | Audio visualizer |
 | `rofi-colors.rasi.j2` | `rofi/theme-generated.rasi` | Launcher theme |
+| `quick-shelf.css` | `quick-shelf/colors.css` | Quick Shelf GTK palette |
 | `matugen-env.j2` | `matugen/env` | Color env vars |
 | `browser-colors.css.j2` | `matugen/browser-colors.css` | Browser CSS |
 | `hyprlock.conf.j2` | `hypr/hyprlock.conf` | Lock screen |
