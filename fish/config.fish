@@ -52,12 +52,16 @@ if test -f /etc/arch-release
             echo "  font switch      Switch font (dev font switch [paper|jetbrains])"
             echo "  font toggle      Toggle between Paper Mono and JetBrainsMono"
             echo ""
-            echo "Quick Shelf Widget:"
+            echo "Quick Shelf (qs) Management (github.com/bitzzdev/quickShelf):"
             echo "  shelf fetch      Fetch precompiled quick-shelf binary from GitHub"
             echo "  shelf update     Update quick-shelf binary to latest release"
             echo "  shelf status     Check quick-shelf status"
             echo "  shelf toggle     Toggle quick-shelf terminal shelf"
             echo "  shelf tui        Launch quick-shelf terminal shelf"
+            echo "  shelf ratio      Set or inspect default aspect ratio (e.g. 1:1, 16:9, 4:3)"
+            echo "  shelf view       Set or inspect view format (bento or list)"
+            echo "  shelf bento      Switch shelf view to bento box tile format"
+            echo "  shelf list       Switch shelf view to list format"
             return 0
         end
 
@@ -69,6 +73,7 @@ if test -f /etc/arch-release
                 set -l subcmd $argv[2]
                 switch "$subcmd"
                     case fetch update
+                        set -l fetched 1
                         if test -f "$HOME/.config/quick/shelf/fetch-binary.sh"
                             "$HOME/.config/quick/shelf/fetch-binary.sh"
                         else if test -f "$HOME/.local/bin/fetch-quick-shelf"
@@ -79,8 +84,31 @@ if test -f /etc/arch-release
                                 "$git_script"
                             else
                                 echo "fetch-quick-shelf.sh not found."
+                                set fetched 0
                             end
                         end
+                        if test $fetched -eq 1
+                            pkill -x quick-shelf 2>/dev/null || true
+                            if type -q notify-send
+                                notify-send -a "Quick Shelf" -i "quick-shelf" "Quick Shelf" "quickShelf updated by github.com/bitzzdev" 2>/dev/null || true
+                            end
+                        end
+                    case ratio aspect aspect-ratio
+                        if test (count $argv) -ge 3
+                            quick-shelf --ratio $argv[3]
+                        else
+                            quick-shelf --ratio
+                        end
+                    case view format
+                        if test (count $argv) -ge 3
+                            quick-shelf --view $argv[3]
+                        else
+                            quick-shelf --view
+                        end
+                    case bento
+                        quick-shelf --bento
+                    case list
+                        quick-shelf --list
                     case status
                         if type -q quick-shelf
                             quick-shelf --status
@@ -274,5 +302,8 @@ if test -f /etc/arch-release
     alias dev-shelf-update='dev shelf update'
     alias dev-shelf-status='dev shelf status'
     alias dev-shelf-toggle='dev shelf toggle'
+    alias dev-shelf-ratio='dev shelf ratio'
+    alias dev-shelf-view='dev shelf view'
+    alias qs='quick-shelf'
 end
 

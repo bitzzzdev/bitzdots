@@ -40,6 +40,10 @@ if [ "$fetch_success" = true ] && [ -s "$TEMP_FILE" ]; then
         mv "$TEMP_FILE" "$DEST_BIN"
         chmod +x "$DEST_BIN"
         echo "   Quick Shelf binary installed successfully to $DEST_BIN"
+        pkill -x quick-shelf 2>/dev/null || true
+        if command -v notify-send >/dev/null 2>&1; then
+            notify-send -a "Quick Shelf" -i "quick-shelf" "Quick Shelf" "quickShelf updated by github.com/bitzzdev" 2>/dev/null || true
+        fi
         "$DEST_BIN" --version 2>/dev/null || true
         exit 0
     else
