@@ -56,8 +56,8 @@ if test -f /etc/arch-release
             echo "  shelf fetch      Fetch precompiled quick-shelf binary from GitHub"
             echo "  shelf update     Update quick-shelf binary to latest release"
             echo "  shelf status     Check quick-shelf status"
-            echo "  shelf toggle     Toggle quick-shelf popover"
-            echo "  shelf homescreen Launch quick-shelf as desktop widget"
+            echo "  shelf toggle     Toggle quick-shelf terminal shelf"
+            echo "  shelf tui        Launch quick-shelf terminal shelf"
             return 0
         end
 
@@ -69,8 +69,8 @@ if test -f /etc/arch-release
                 set -l subcmd $argv[2]
                 switch "$subcmd"
                     case fetch update
-                        if test -f "$HOME/.config/qshelf/fetch-binary.sh"
-                            "$HOME/.config/qshelf/fetch-binary.sh"
+                        if test -f "$HOME/.config/quick/shelf/fetch-binary.sh"
+                            "$HOME/.config/quick/shelf/fetch-binary.sh"
                         else if test -f "$HOME/.local/bin/fetch-quick-shelf"
                             "$HOME/.local/bin/fetch-quick-shelf"
                         else

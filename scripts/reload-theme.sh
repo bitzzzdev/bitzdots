@@ -75,7 +75,7 @@ if [ -n "$chromium_theme" ]; then
     done
 fi
 
-# --- Quick Shelf: reload the generated GTK palette ---
+# --- Quick Shelf: reload the generated TUI palette ---
 if pgrep -x quick-shelf > /dev/null; then
     if command -v quick-shelf &>/dev/null; then
         quick-shelf --reload-style >/dev/null 2>&1 || true

@@ -5,7 +5,7 @@
 set -euo pipefail
 
 BIN_DIR="${XDG_BIN_HOME:-$HOME/.local/bin}"
-CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/qshelf"
+CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/quick/shelf"
 DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/quick-shelf"
 REPO="bitzzdev/quickShelf"
 RELEASE_TAG="quick-shelf-latest"
@@ -45,17 +45,6 @@ if [ "$fetch_success" = true ] && [ -s "$TEMP_FILE" ]; then
     else
         echo "   Warning: Downloaded file is not an ELF binary."
     fi
-fi
-
-# Fallback: check if local python fallback launcher exists
-FALLBACK_LAUNCHER="$(cd "$(dirname "$0")" && pwd)/quick-shelf.py"
-if [ -f "$FALLBACK_LAUNCHER" ]; then
-    echo "   GitHub release not yet available or offline."
-    echo "   Linking local Python GTK fallback launcher to $DEST_BIN..."
-    ln -sf "$FALLBACK_LAUNCHER" "$DEST_BIN"
-    chmod +x "$DEST_BIN"
-    echo "   Quick Shelf fallback launcher installed to $DEST_BIN"
-    exit 0
 fi
 
 echo "   Could not fetch binary from $DOWNLOAD_URL"

@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """
-Quick Shelf widget and Waybar helper fallback.
+Legacy Quick Shelf fallback kept for migration reference.
+
+The supported implementation is the Rust terminal UI. This file no longer
+starts a GTK interface.
 Supports app shortcuts, image drop shelf with instant previews, and two-way drag-and-drop.
 """
 
@@ -14,7 +17,7 @@ import time
 from pathlib import Path
 
 # Paths
-CONFIG_DIR = Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config")) / "qshelf"
+CONFIG_DIR = Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config")) / "quick" / "shelf"
 DATA_DIR = Path(os.environ.get("XDG_DATA_HOME", Path.home() / ".local/share")) / "quick-shelf"
 IMAGES_DIR = DATA_DIR / "images"
 SHORTCUTS_FILE = DATA_DIR / "shortcuts.json"
@@ -587,38 +590,8 @@ def launch_gui(is_homescreen=False):
             SOCKET_FILE.unlink(missing_ok=True)
 
 def main():
-    action = sys.argv[1] if len(sys.argv) > 1 else "--toggle"
-
-    if action in ("--help", "-h"):
-        print("Usage: quick-shelf [--homescreen|--toggle|--popup|--status|--reload-style]")
-        return
-    if action in ("--version", "-v"):
-        print("quick-shelf 0.1.0 (fallback)")
-        return
-    if action == "--status":
-        print_status()
-        return
-    if action == "--reload-style":
-        res = send_ipc("reload-style")
-        print("Reloaded style" if res == "ok" else "quick-shelf not running")
-        return
-    if action == "--toggle":
-        res = send_ipc("toggle")
-        if res == "ok":
-            return
-        launch_gui(is_homescreen=False)
-        return
-    if action == "--popup":
-        res = send_ipc("show")
-        if res == "ok":
-            return
-        launch_gui(is_homescreen=False)
-        return
-    if action in ("--homescreen", "--desktop"):
-        launch_gui(is_homescreen=True)
-        return
-
-    print(f"Unknown action: {action}")
+    print("The Python fallback is retired. Install quick-shelf and run `quick-shelf --tui`.")
+    raise SystemExit(1)
 
 if __name__ == "__main__":
     main()

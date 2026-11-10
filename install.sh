@@ -274,8 +274,8 @@ install_scripts() {
     ln -sf "$DOTFILES_DIR/scripts/hyprlogout" "$HOME/.local/bin/hyprlogout"
     ln -sf "$DOTFILES_DIR/scripts/font-switch.sh" "$HOME/.local/bin/font-switch.sh"
     ln -sf "$DOTFILES_DIR/scripts/fetch-quick-shelf.sh" "$HOME/.local/bin/fetch-quick-shelf"
-    mkdir -p "$CONFIG_DIR/qshelf"
-    ln -sf "$DOTFILES_DIR/scripts/fetch-quick-shelf.sh" "$CONFIG_DIR/qshelf/fetch-binary.sh"
+    mkdir -p "$CONFIG_DIR/quick/shelf"
+    ln -sf "$DOTFILES_DIR/scripts/fetch-quick-shelf.sh" "$CONFIG_DIR/quick/shelf/fetch-binary.sh"
 
     ok "Matugen scripts and templates linked"
 }
@@ -287,7 +287,7 @@ make_executable() {
         done
     done
     chmod +x "$HOME/.local/bin/hyprlogout" "$HOME/.local/bin/font-switch.sh" "$HOME/.local/bin/fetch-quick-shelf" 2>/dev/null || true
-    chmod +x "$DOTFILES_DIR/scripts/fetch-quick-shelf.sh" "$DOTFILES_DIR/scripts/quick-shelf.py" 2>/dev/null || true
+    chmod +x "$DOTFILES_DIR/scripts/fetch-quick-shelf.sh" 2>/dev/null || true
     ok "Scripts made executable"
 }
 

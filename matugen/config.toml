@@ -36,7 +36,7 @@ output_path = "~/.config/rofi/theme-generated.rasi"
 
 [templates.quick_shelf]
 input_path = "~/.config/matugen/templates/quick-shelf.css"
-output_path = "~/.config/qshelf/colors.css"
+output_path = "~/.config/quick/shelf/colors.css"
 
 [templates.env]
 input_path = "~/.config/matugen/templates/matugen-env"
