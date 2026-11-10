@@ -4,3 +4,10 @@ __pycache__/
 *.swp
 *.bak
 .DS_Store
+
+# Session and context exports
+*context*.md
+*session*.md
+*.session.md
+my-session.md
+.copilot/

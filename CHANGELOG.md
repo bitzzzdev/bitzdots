@@ -18,6 +18,8 @@
 - GitHub Actions validation for configuration scripts and shell syntax.
 
 ### Changed
+- Documented that Quick Shelf consumes the current Matugen palette directly
+  and can be riced independently through its isolated config directory.
 - Documented Quick Shelf in the theming pipeline and repository layout.
 - Standardized documentation and documented XDG and wallpaper environment
   variables.

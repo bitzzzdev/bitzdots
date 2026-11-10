@@ -76,6 +76,17 @@ When a wallpaper is changed, `reload-theme.sh`:
 4. Updates Hyprland border colors from `colors.lua`
 5. Restarts waybar so all module colors refresh
 
+Quick Shelf reads the generated palette from
+`~/.config/quick/shelf/colors.css`. Its TUI accepts the same hex, `rgb(...)`,
+and `rgba(...)` values used by the rest of the generated theme. When bitzdots
+is active, no second Quick Shelf palette or theme configuration is required.
+Users of other dotfiles can provide that file themselves and keep layout
+customization in Quick Shelf's `config.json`.
+
+See the Quick Shelf
+[ricing guide](https://github.com/bitzzdev/quickShelf/blob/main/docs/ricing.md)
+for layout, section ordering, and dotfiles linking examples.
+
 ## Backup/Restore Safety
 
 Before every theme generation, the system:
