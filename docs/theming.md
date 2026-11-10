@@ -101,7 +101,7 @@ All 26 templates in `matugen/templates/`:
 | `kitty-colors.conf.j2` | `kitty/colors.conf` | Terminal colors |
 | `cava-colors.j2` | `cava/themes/generated` | Audio visualizer |
 | `rofi-colors.rasi.j2` | `rofi/theme-generated.rasi` | Launcher theme |
-| `quick-shelf.css` | `qshelf/colors.css` | Quick Shelf GTK palette |
+| `quick-shelf.css` | `quick/shelf/colors.css` | Quick Shelf terminal palette |
 | `matugen-env.j2` | `matugen/env` | Color env vars |
 | `browser-colors.css.j2` | `matugen/browser-colors.css` | Browser CSS |
 | `hyprlock.conf.j2` | `hypr/hyprlock.conf` | Lock screen |

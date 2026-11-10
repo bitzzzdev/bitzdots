@@ -139,7 +139,7 @@ Full reference: **[docs/keybindings.md](docs/keybindings.md)**
 ├── kitty/             # Terminal (themed)
 ├── cava/              # Audio visualizer (themed)
 ├── matugen/           # Theming engine (26 templates)
-├── qshelf/             # Generated Quick Shelf palette lives in ~/.config/qshelf
+├── quick/shelf/        # Generated Quick Shelf palette lives in ~/.config/quick/shelf
 ├── fish/              # Fish shell config
 ├── fastfetch/         # System fetch (custom logo)
 └── scripts/           # 10 utility scripts
@@ -174,11 +174,11 @@ All apps pick up new colors instantly
 ## Quick Shelf Widget
 
 bitzdots integrates **Quick Shelf**, a lightweight desktop shelf and Waybar popover:
-- **App Shortcuts**: Quick-launch pinned apps or search and add installed desktop applications.
-- **Image Shelf**: Drag and drop images from file managers or web browsers into the shelf for instant preview.
-- **Two-way Drag and Drop**: Drag thumbnails directly out of the shelf into external apps (Discord, web browsers, GIMP, Nautilus).
-- **Homescreen Widget**: Runs on the desktop background layer (`quick-shelf --homescreen`).
-- **Waybar Module**: Displays item counts with click-to-toggle popover on the bar (`SUPER + D`).
+- **App Shortcuts**: Quick-launch pinned apps from the terminal shelf.
+- **Image Shelf**: Add image paths through terminal paste and open them from the shelf.
+- **Mouse Controls**: Click to open, right-click to remove, scroll to select, and drag to reorder.
+- **Terminal Shelf**: Opens a Rofi-style mouse-enabled TUI (`quick-shelf --tui`).
+- **Waybar Module**: Displays item counts with click-to-toggle terminal shelf on the bar (`SUPER + D`).
 
 To fetch the precompiled release binary without on-device compilation:
 ```bash
@@ -195,7 +195,7 @@ dev shelf update
 - **matugen:** Material 3 color palette generator
 - **inotify-tools:** Required by the cache daemon
 - **Nerd Font:** Provides icons, JetBrainsMono is recommended
-- **GTK 3** and **gtk-layer-shell**: for Wayland layer widgets
+- **GTK 3** and **gdk-pixbuf**: for image metadata and clipboard integration
 
 ## Environment Variables
 
