@@ -3,6 +3,9 @@
 ## [Unreleased]
 
 ### Added
+- Added `qs` shell alias and `dev shelf ratio` and `dev shelf view` commands.
+- Added 1:1 default floating window geometry (`640x640`) for Quick Shelf in Hyprland rules.
+- Added automatic process restart and desktop update notification in `fetch-quick-shelf.sh`.
 - Added a Matugen template that generates the Quick Shelf palette at
   `~/.config/quick/shelf/colors.css`.
 - Added Quick Shelf to the theme reload sequence when it is running.

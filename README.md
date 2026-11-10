@@ -171,23 +171,22 @@ Config files for every component (20+ files)
 All apps pick up new colors instantly
 ```
 
-## Quick Shelf Widget
+## Quick Shelf (qs) Integration
 
-bitzdots integrates **Quick Shelf**, a lightweight desktop shelf and Waybar popover:
-- **App Shortcuts**: Quick-launch pinned apps from the terminal shelf.
-- **Image Shelf**: Add image paths through terminal paste and open them from the shelf.
-- **Mouse Controls**: Click to open, right-click to remove, scroll to select, and drag to reorder.
-- **Terminal Shelf**: Opens a Rofi-style mouse-enabled TUI (`quick-shelf --tui`).
-- **Waybar Module**: Displays item counts with click-to-toggle terminal shelf on the bar (`SUPER + D`).
+bitzdots integrates [Quick Shelf (`quickShelf`)](https://github.com/bitzzdev/quickShelf), a mouse-enabled terminal shelf and Waybar popup widget by [bitzzdev](https://github.com/bitzzdev):
+- **1:1 Default Aspect Ratio**: Centered square floating geometry (`640x640`) matching bitzdots aesthetics.
+- **Bento & List Views**: Tile card bento box and vertical list formats, toggled with `v` or `dev shelf view`.
+- **Thumbnails & App Logos**: Half-block terminal graphics and Nerd Font badges loaded for both formats.
+- **App Shortcuts**: Quick-launch pinned apps or search and add installed applications with `a`.
+- **External Drag-and-Drop**: Drag images or app shortcuts directly into external apps (Discord, GIMP, browser) with `x` or middle-click.
+- **Waybar Module & Keybinding**: Shows item count with click-to-toggle on the bar or via `SUPER + D`.
+- **Shell Command Alias**: Use `qs` or `dev shelf` directly from the shell.
 
-To fetch the precompiled release binary without on-device compilation:
-```bash
-dev shelf fetch
-```
-Or update:
+To install or update the precompiled release binary:
 ```bash
 dev shelf update
 ```
+When updated, any running instance is automatically refreshed with a desktop notification.
 
 ## Requirements
 
